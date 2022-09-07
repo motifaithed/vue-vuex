@@ -11,7 +11,7 @@
             //         value: 10
             //     });
             // }
-            ...mapActions(['increase'])
+            ...mapActions('counterModule',['increase'])
         }
     }
 </script>

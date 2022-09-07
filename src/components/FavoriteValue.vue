@@ -10,7 +10,7 @@
         //   checkCounter(){
         //       return this.$store.getters.normalizedCounter;
         //   }
-        ...mapGetters(['normalizedCounter'])
+        ...mapGetters('counterModule',['normalizedCounter'])
       }
   }
 </script>

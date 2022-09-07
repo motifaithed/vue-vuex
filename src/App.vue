@@ -34,7 +34,7 @@ export default {
     // incrementCounter(){
     //   this.$store.dispatch('increment');
     // }
-    ...mapActions(['increment'])
+    ...mapActions('counterModule',['increment'])
   }
 };
 </script>

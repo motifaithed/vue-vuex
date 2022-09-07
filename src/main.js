@@ -6,6 +6,7 @@ import App from './App.vue';
 const app = createApp(App);
 
 const counterModule = {
+    namespaced: true,
     state(){
         return{
             counter: 0,
