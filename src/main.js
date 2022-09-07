@@ -5,11 +5,11 @@ import App from './App.vue';
 
 const app = createApp(App);
 
-const store = createStore({
+const counterModule = {
     state(){
-        return {
-            counter: 0
-        };
+        return{
+            counter: 0,
+        }
     },
     mutations:{
         increment(state){
@@ -17,7 +17,7 @@ const store = createStore({
         },
         increase(state, payload){
             state.counter = state.counter + payload.value;
-        }
+        },
     },
     actions:{
         increment(context){
@@ -27,18 +27,54 @@ const store = createStore({
             setTimeout(()=>{
                 context.commit('increase', payload);
             },2000)
-        }
+        },
     },
     getters:{
         finalCounter(state){
-           return state.counter * 10;
+            return state.counter * 10;
+         },
+         normalizedCounter(_,getters){
+             const value = getters.finalCounter;
+             if(value >= 100){
+                 return 100;
+             }
+             return value;
+         },
+    }
+}
+
+const store = createStore({
+    modules:{
+        counterModule: counterModule
+    },
+    state(){
+        return {
+            
+            isLoggedIn: false
+        };
+    },
+    mutations:{
+       
+        login(state){
+            state.isLoggedIn = true;
         },
-        normalizedCounter(_,getters){
-            const value = getters.finalCounter;
-            if(value >= 100){
-                return 100;
-            }
-            return value;
+        logout(state){
+            state.isLoggedIn = false;
+        }
+    },
+    actions:{
+        
+        login(context){
+            context.commit('login')
+        },
+        logout(context){
+            context.commit('logout');
+        }
+    },
+    getters:{
+       
+        loginState(state){
+            return state.isLoggedIn;
         }
     }
 })
